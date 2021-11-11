@@ -1,21 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getDoctors } from '../../state/actions/doctor'
+
+import { Layout } from '../ui/Layout'
+import { Doctors } from '../app/Doctors'
 
 export const HomeScreen = () => {
-    const [data, setData] = useState({})
 
-    // useEffect(() => {
-    //     fetch("http://localhost:3001/api/paciente/")
-    //         .then( res => res.json())
-    //         .then( data => {
-    //             setData( data )
-    //         })
-    //     }, [])
-    //     console.log( data )
-
-
+    const dispatch = useDispatch()
+    const { doctores } = useSelector(state => state.doctor)
+        
+    useEffect(() => {
+        const token = JSON.parse(window.localStorage.getItem('authToken'))
+        dispatch( getDoctors(token) )
+    }, [ dispatch ])
+    
     return (
-        <div>
-            <h1>Healthy home screen</h1>
-        </div>
+        <>
+            <Layout>
+                <Doctors data={ doctores } />
+            </Layout>
+        </>
     )
 }

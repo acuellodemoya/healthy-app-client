@@ -1,22 +1,46 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
     Redirect
 } from "react-router-dom";
-import { HomeScreen } from '../components/app/HomeScreen';
-import { LoginScreen } from '../components/auth/LoginScreen';
-import { RegisterScreen } from '../components/auth/RegisterScreen';
+import { getToken } from '../helpers/getToken';
+import { AuthRouter } from './AuthRouter';
+import { HomeRouter } from './HomeRouter';
+import { PrivateRoute } from './PrivateRouter';
+import { PublicRouter } from './PublicRouter';
+
 
 export const AppRouter = () => {
+    const [isLogged, setIsLogged] = useState( false )
+
+    useEffect(() => {
+        const token = getToken()
+
+        if( token ) {
+            setIsLogged( true )
+            
+        }else {
+            setIsLogged( false )
+        }
+    }, [ isLogged, setIsLogged ])
+
+
     return (
         <Router>
             <Switch>
-                <Route exact path="/login" component={ LoginScreen }/>
-                <Route exact path="/register" component={ RegisterScreen }/>
-                <Route path="/" component={ HomeScreen }/>
-                <Redirect to="/"/>
+                <PublicRouter 
+                    path="/auth"
+                    component={ AuthRouter }
+                    isLogged={ isLogged }
+                />
+                <PrivateRoute
+                    exact
+                    path="/"
+                    component={ HomeRouter }
+                    isLogged={ isLogged }
+                />
+                <Redirect to="/auth/login"/>
             </Switch>
         </Router>        
     )

@@ -1,0 +1,16 @@
+.container {
+  width: 90%;
+  margin: 0 auto;
+  height: 100vh;
+  background-color: rgb(241, 241, 241);
+  z-index: 1;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  & .list-item {
+    padding: 1rem 3rem;
+  }
+}
