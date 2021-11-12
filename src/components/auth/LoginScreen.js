@@ -38,9 +38,9 @@ export const LoginScreen = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     apiCall();
-    dispatch( setLogged() )
-    reset();
-    history.replace('/')
+    dispatch( setLogged( true ) )
+    // reset();
+    setTimeout((() => history.push('/')), 2000 )
   }
 
   return (
@@ -50,7 +50,7 @@ export const LoginScreen = () => {
         </div>
         <div className="auth__container-form">
           <h3 className="auth__form-title"> Bienvenido </h3>
-          <form onSubmit={ handleSubmit } >
+          <form >
             <input 
               className="auth__input" 
               type="text" 
@@ -69,9 +69,9 @@ export const LoginScreen = () => {
               onChange={ handleInputChange }
             />
 
-            <button className="auth__btn" type="submit"> Iniciar </button>
+            <button className="auth__btn" onClick={ handleSubmit } type="submit"> Iniciar </button>
             
-            <Link to="/auth/register" className="auth__link"> Registro </Link>
+            <Link to="/register" className="auth__link"> Registro </Link>
           </form>
         </div>
       </div>

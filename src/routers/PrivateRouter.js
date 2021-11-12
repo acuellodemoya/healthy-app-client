@@ -1,7 +1,8 @@
-import React from 'react'
-import { Redirect, Route } from 'react-router'
+import React from 'react';
+import { Redirect, Route } from 'react-router';
+import { Layout } from '../components/ui/Layout';
 
-export const PrivateRoute = ({
+export const PrivateRouter = ({
   component: Component,
   isLogged,
   ...rest
@@ -10,8 +11,14 @@ export const PrivateRoute = ({
     <Route {...rest}
       component={ ( props ) => (
         ( isLogged )
-        ? <Component { ...props }/>
-        : <Redirect to="/auth/login"/>
+        ? (
+          <Layout>
+            <Component { ...props }/>
+          </Layout>
+        )
+        : (
+          <Redirect to="/login"/>
+        )
       )}
     />
   )

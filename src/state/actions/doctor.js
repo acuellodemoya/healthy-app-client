@@ -12,7 +12,7 @@ export const getDoctors = ( token ) => {
     
     const response = await fetch("http://localhost:3001/api/doctor", config)
     const data = await response.json()
-    dispatch( cargarDoctores(data) )
+    await dispatch( cargarDoctores(data) )
   }
 }
 

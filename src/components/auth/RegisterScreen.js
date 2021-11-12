@@ -35,7 +35,7 @@ export const RegisterScreen = () => {
 
     apiCall()
     reset();
-    history.push('/auth/login')
+    history.push('/login')
   }
 
   return (
@@ -102,7 +102,7 @@ export const RegisterScreen = () => {
 
           <button className="auth__btn" type="submit"> Registrar </button>
           
-          <Link to="/auth/login" className="auth__link"> Iniciar Sesion </Link>
+          <Link to="/login" className="auth__link"> Iniciar Sesion </Link>
         </form>
       </div>
     </div>

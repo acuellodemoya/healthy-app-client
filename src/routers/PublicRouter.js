@@ -1,5 +1,5 @@
-import React from 'react'
-import { Redirect, Route } from 'react-router'
+import React from 'react';
+import { Redirect, Route } from 'react-router';
 
 export const PublicRouter = ({
   component: Component,
@@ -9,9 +9,13 @@ export const PublicRouter = ({
   return (
     <Route {...rest}
       component={ ( props ) => (
-        ( !isLogged )
-        ? <Component { ...props }/>
-        : <Redirect to="/"/>
+        ( isLogged )
+        ? (
+          <Redirect to="/"/>
+        )
+        : (
+          <Component { ...props }/>
+        )
       )}
     />
   )

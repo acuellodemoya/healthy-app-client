@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getDoctors } from '../../state/actions/doctor'
-
-import { Layout } from '../ui/Layout'
 import { Doctors } from '../app/Doctors'
 
 export const HomeScreen = () => {
@@ -17,9 +15,7 @@ export const HomeScreen = () => {
     
     return (
         <>
-            <Layout>
-                <Doctors data={ doctores } />
-            </Layout>
+            <Doctors data={ doctores } />
         </>
     )
 }

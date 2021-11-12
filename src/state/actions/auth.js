@@ -1,8 +1,9 @@
 import { types } from "../types/types"
 
-export const setLogged = () => {
+export const setLogged = ( log ) => {
   return {
-    type: types.login
+    type: types.login,
+    payload: log
   }
 }
 

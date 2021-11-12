@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
+import { setLogout } from '../../state/actions/auth';
 
 export const Navbar = () => {
 
   const history = useHistory()
+  const dispatch = useDispatch()
 
   const [showNav, setShowNav] = useState( false )
 
@@ -13,6 +16,7 @@ export const Navbar = () => {
 
   const handleLogout = () => {
     window.localStorage.removeItem('authToken')
+    dispatch( setLogout() )
   }
 
   return (
@@ -26,7 +30,7 @@ export const Navbar = () => {
           }
         </div>
         <h1>Healthy App</h1>
-        <Link to='/auth/login' onClick={ handleLogout } className="btn"><i class="fas fa-sign-out-alt"></i>Logout</Link>
+        <Link to="/" onClick={ handleLogout } className="btn"><i class="fas fa-sign-out-alt"></i>Logout</Link>
       </div>
 
       <div className={`side-bar ${ showNav ?"" : "hidden" }`}>
@@ -34,15 +38,15 @@ export const Navbar = () => {
             <h3 className="side-bar__name">Pepe</h3>
             <div className="side-bar__link">
               <i className="fas fa-user-circle"></i>
-              <span>Home</span>
+              <Link to="/">Doctores</Link>
             </div>
             <div className="side-bar__link">
               <i className="far fa-calendar-alt"></i>
-              <span>Calendar</span>
+              <Link to="/crear-cita">Calendar</Link>
             </div>
             <div className="side-bar__link">
               <i className="fas fa-th-list"></i>
-              <span>List</span>
+              <Link to="/pacientes">Pacientes</Link>
             </div>
           </div>
           {/* <Link to="/login" className="btn">Logout</Link> */}

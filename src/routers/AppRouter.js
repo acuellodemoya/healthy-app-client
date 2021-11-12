@@ -1,47 +1,48 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
 import {
     BrowserRouter as Router,
     Switch,
-    Redirect
+    Redirect,
 } from "react-router-dom";
+import { Appointment } from '../components/app/Appointment';
+import { HomeScreen } from '../components/app/HomeScreen';
+import { ListPatients } from '../components/app/ListPatients';
+import { LoginScreen } from '../components/auth/LoginScreen';
+import { RegisterScreen } from '../components/auth/RegisterScreen';
 import { getToken } from '../helpers/getToken';
-import { AuthRouter } from './AuthRouter';
-import { HomeRouter } from './HomeRouter';
-import { PrivateRoute } from './PrivateRouter';
+import { setLogged } from '../state/actions/auth';
+import { PrivateRouter } from './PrivateRouter';
 import { PublicRouter } from './PublicRouter';
 
 
 export const AppRouter = () => {
-    const [isLogged, setIsLogged] = useState( false )
+  const dispatch = useDispatch()
+  const [isLogged, setisLogged] = useState(false)
+  
+  useEffect(() => {
+    const token = getToken()
+    console.log(token)
+    if( token ) {
+      dispatch( setLogged( token ) )
+      setisLogged( true )  
+    }else {
+      dispatch( setLogged( token ) )
+      setisLogged( false )
+    }
+  }, [ isLogged, dispatch ])
 
-    useEffect(() => {
-        const token = getToken()
 
-        if( token ) {
-            setIsLogged( true )
-            
-        }else {
-            setIsLogged( false )
-        }
-    }, [ isLogged, setIsLogged ])
-
-
-    return (
-        <Router>
-            <Switch>
-                <PublicRouter 
-                    path="/auth"
-                    component={ AuthRouter }
-                    isLogged={ isLogged }
-                />
-                <PrivateRoute
-                    exact
-                    path="/"
-                    component={ HomeRouter }
-                    isLogged={ isLogged }
-                />
-                <Redirect to="/auth/login"/>
-            </Switch>
-        </Router>        
-    )
+  return (
+    <Router>
+      <Switch>
+        <PublicRouter isLogged={ isLogged } exact={ true } path="/login" component={ LoginScreen }/>
+        <PublicRouter isLogged={ isLogged } exact={ true } path="/register" component={ RegisterScreen }/>
+        <PrivateRouter isLogged={ isLogged }  exact={ true } path="/pacientes" component={ ListPatients }/>
+        <PrivateRouter isLogged={ isLogged } exact={ true } path="/crear-cita" component={ Appointment }/>
+        <PrivateRouter isLogged={ isLogged } exact={ true } path="/" component={ HomeScreen }/>
+        <Redirect to="/login"/>
+      </Switch>
+    </Router>        
+  )
 }

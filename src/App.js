@@ -4,11 +4,11 @@ import { AppRouter } from './routers/AppRouter'
 import { store } from './state/store/store'
 
 export const App = () => {
-    return (
-        <div>
-            <Provider store={ store }>
-                <AppRouter/>
-            </Provider>
-        </div>
-    )
+  return (
+    <div>
+      <Provider store={ store }>
+        <AppRouter/>
+      </Provider>
+    </div>
+  )
 }
