@@ -1,46 +1,23 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Link, useHistory } from 'react-router-dom'
-import { useState } from 'react/cjs/react.development'
+import { Link } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm'
-import { setLogged } from '../../state/actions/auth'
+import { startLogin } from '../../state/actions/auth'
 
 
 export const LoginScreen = () => {
-
-  const history = useHistory()
   const dispatch = useDispatch()
 
-  const [ values, handleInputChange, reset ] = useForm({
-    email: 'gabriel@email.com',
-    password: '123456'
+  const [ values, handleInputChange ] = useForm({
+    email: 'pepito@email.com',
+    password: '12345'
   })
-
-  const [user, setUser] = useState(localStorage.getItem('authToken'))
   
   const { email, password } = values
 
-  const apiCall = async() => {
-    const config = {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify( values )
-    }
-  
-    const apiCall = await fetch("http://localhost:3001/api/auth", config)
-    const res = await apiCall.json()
-    setUser(res)
-    window.localStorage.setItem('authToken', JSON.stringify(res.token))
-  }
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    apiCall();
-    dispatch( setLogged( true ) )
-    // reset();
-    setTimeout((() => history.push('/')), 2000 )
+    dispatch( startLogin(email, password) )
   }
 
   return (

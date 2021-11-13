@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { setLogout } from '../../state/actions/auth';
 
 export const Navbar = () => {
-
-  const history = useHistory()
   const dispatch = useDispatch()
 
   const [showNav, setShowNav] = useState( false )

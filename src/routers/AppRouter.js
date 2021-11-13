@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     BrowserRouter as Router,
     Switch,
@@ -18,29 +18,26 @@ import { PublicRouter } from './PublicRouter';
 
 export const AppRouter = () => {
   const dispatch = useDispatch()
-  const [isLogged, setisLogged] = useState(false)
-  
+  const { islogged } = useSelector(state => state.auth);
+
   useEffect(() => {
     const token = getToken()
-    console.log(token)
     if( token ) {
       dispatch( setLogged( token ) )
-      setisLogged( true )  
     }else {
       dispatch( setLogged( token ) )
-      setisLogged( false )
     }
-  }, [ isLogged, dispatch ])
+  }, [ islogged, dispatch ])
 
 
   return (
     <Router>
       <Switch>
-        <PublicRouter isLogged={ isLogged } exact={ true } path="/login" component={ LoginScreen }/>
-        <PublicRouter isLogged={ isLogged } exact={ true } path="/register" component={ RegisterScreen }/>
-        <PrivateRouter isLogged={ isLogged }  exact={ true } path="/pacientes" component={ ListPatients }/>
-        <PrivateRouter isLogged={ isLogged } exact={ true } path="/crear-cita" component={ Appointment }/>
-        <PrivateRouter isLogged={ isLogged } exact={ true } path="/" component={ HomeScreen }/>
+        <PublicRouter isLogged={ islogged } exact={ true } path="/login" component={ LoginScreen }/>
+        <PublicRouter isLogged={ islogged } exact={ true } path="/register" component={ RegisterScreen }/>
+        <PrivateRouter isLogged={ islogged }  exact={ true } path="/pacientes" component={ ListPatients }/>
+        <PrivateRouter isLogged={ islogged } exact={ true } path="/crear-cita" component={ Appointment }/>
+        <PrivateRouter isLogged={ islogged } exact={ true } path="/" component={ HomeScreen }/>
         <Redirect to="/login"/>
       </Switch>
     </Router>        

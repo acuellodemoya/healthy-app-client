@@ -26,8 +26,7 @@ export const RegisterScreen = () => {
     }
   
     const apiCall = await fetch("http://localhost:3001/api/doctor", config)
-    const res = await apiCall.json()
-    console.log(res)
+    await apiCall.json()
   }
 
   const handleSubmit = (e) => {
