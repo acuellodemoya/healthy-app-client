@@ -28,7 +28,7 @@ export const Doctors = ({ data }) => {
                 <h3>{ doctor.email }</h3>
                 <p>{ doctor.telefono }</p>
               </div>
-              <div className="doctor-actions">
+              <div className="actions">
                 <button 
                   onClick={() => handleEdit(doctor) } className="btn edit">
                   Editar

@@ -1,20 +1,12 @@
 import { types } from "../types/types"
 import Swal from "sweetalert2"
+import { fetchWithoutToken } from "../../helpers/fech"
 
 export const startLogin = ( email, password ) => {
   return async( dispatch ) => {
-    
-    const config = {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    }
   
-    const apiCall = await fetch("http://localhost:3001/api/auth", config)
+    const apiCall = await fetchWithoutToken( "auth", { email, password } )
     const res = await apiCall.json()
-    console.log(res)
 
     if( res?.token ){
       window.localStorage.setItem('authToken', JSON.stringify(res.token))
@@ -23,6 +15,18 @@ export const startLogin = ( email, password ) => {
       Swal.fire('Error', res.message, 'error')
     }
 
+  }
+}
+
+export const startRegister = ( user ) => {
+  return async() => {
+  
+    const apiCall = await fetchWithoutToken("doctor", user)
+    const res = await apiCall.json()
+    console.log( res )
+    if(res?.message){
+      Swal.fire(res.message, '', 'success')
+    }
   }
 }
 

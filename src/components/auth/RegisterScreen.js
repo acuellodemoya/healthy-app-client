@@ -1,10 +1,13 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm'
+import { startRegister } from '../../state/actions/auth'
 
 export const RegisterScreen = () => {
 
   const history = useHistory()
+  const dispatch = useDispatch()
 
   const [ values, handleInputChange, reset ] = useForm({
     nombres: '', 
@@ -16,25 +19,19 @@ export const RegisterScreen = () => {
   })
   const { nombres, apellidos, telefono ,email ,password ,password2 } = values
 
-  const apiCall = async() => {
-    const config = {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify( values )
-    }
-  
-    const apiCall = await fetch("http://localhost:3001/api/doctor", config)
-    await apiCall.json()
-  }
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    const user = {
+      nombres: nombres,
+      apellidos: apellidos,
+      email: email,
+      telefono: telefono,
+      password: password
+    }
 
-    apiCall()
+    dispatch( startRegister(user) )
     reset();
-    history.push('/login')
+    setTimeout(() => history.push('/login'), 3000)
   }
 
   return (
@@ -65,7 +62,7 @@ export const RegisterScreen = () => {
 
           <input 
             className="auth__input" 
-            type="text" 
+            type="number" 
             placeholder=" Telefono "
             name="telefono"
             value={ telefono }
@@ -74,7 +71,7 @@ export const RegisterScreen = () => {
 
           <input 
             className="auth__input" 
-            type="text" 
+            type="email" 
             placeholder=" Correo "
             name="email"
             value={ email }

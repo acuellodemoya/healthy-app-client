@@ -1,18 +1,11 @@
 import Swal from "sweetalert2";
+import { fetchWithToken } from "../../helpers/fech";
 import { types } from "../types/types";
-
-const token = JSON.parse(window.localStorage.getItem('authToken'))
 
 export const getDoctors = () => {
   return async( dispatch ) => {
-    const config = {
-        method: 'GET',
-        headers:{
-          'auth': `${ token }`
-        }
-    }
     
-    const response = await fetch("http://localhost:3001/api/doctor", config)
+    const response = await fetchWithToken("doctor", "", "GET")
     const data = await response.json()
     
     dispatch( cargarDoctores(data) )
@@ -21,32 +14,17 @@ export const getDoctors = () => {
 
 export const updateDoctor = ({ email, nombresForm, apellidosForm, telefonoForm }) => {
   return async( dispatch ) => {
-    const config = {
-      method: 'PUT',
-      headers: {
-        'Content-type': 'application/json',
-        'auth': `${token}`
-      },
-      body: JSON.stringify({ nombresForm, apellidosForm, telefonoForm })
-    }
-    
-    const response = await fetch(`http://localhost:3001/api/doctor/${ email }`, config)
+  
+    const response = await fetchWithToken(`doctor/${ email }`, { nombresForm, apellidosForm, telefonoForm }, "PUT")
     const data = await response.json()
-    console.log( data )
     dispatch( editarDoctor() )
   }
 }
 
 export const deleteDoctor = ( email ) => {
   return async(dispatch) => {
-    const config = {
-      method: 'DELETE',
-      headers: {
-        'auth': `${ token }`
-      }
-    }
-  
-    const apiCall = await fetch(`http://localhost:3001/api/doctor/${ email }`, config)
+    
+    const apiCall = await fetchWithToken(`doctor/${ email }`, "", "DELETE")
     const data = await apiCall.json()
 
     if(data?.message){

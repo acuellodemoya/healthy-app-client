@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {
     BrowserRouter as Router,
     Switch,
     Redirect,
 } from "react-router-dom";
-import { Appointment } from '../components/app/Appointment';
+// import { Appointment } from '../components/app/Appointment';
 import { HomeScreen } from '../components/app/HomeScreen';
 import { ListPatients } from '../components/app/ListPatients';
 import { LoginScreen } from '../components/auth/LoginScreen';
@@ -36,7 +36,7 @@ export const AppRouter = () => {
         <PublicRouter isLogged={ islogged } exact={ true } path="/login" component={ LoginScreen }/>
         <PublicRouter isLogged={ islogged } exact={ true } path="/register" component={ RegisterScreen }/>
         <PrivateRouter isLogged={ islogged }  exact={ true } path="/pacientes" component={ ListPatients }/>
-        <PrivateRouter isLogged={ islogged } exact={ true } path="/crear-cita" component={ Appointment }/>
+        {/* <PrivateRouter isLogged={ islogged } exact={ true } path="/crear-cita" component={ Appointment }/> */}
         <PrivateRouter isLogged={ islogged } exact={ true } path="/" component={ HomeScreen }/>
         <Redirect to="/login"/>
       </Switch>

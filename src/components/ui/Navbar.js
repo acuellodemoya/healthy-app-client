@@ -33,21 +33,19 @@ export const Navbar = () => {
 
       <div className={`side-bar ${ showNav ?"" : "hidden" }`}>
           <div className="side-bar__items">
-            <h3 className="side-bar__name">Pepe</h3>
             <div className="side-bar__link">
               <i className="fas fa-user-circle"></i>
               <Link to="/">Doctores</Link>
             </div>
             <div className="side-bar__link">
-              <i className="far fa-calendar-alt"></i>
-              <Link to="/crear-cita">Calendar</Link>
-            </div>
-            <div className="side-bar__link">
               <i className="fas fa-th-list"></i>
               <Link to="/pacientes">Pacientes</Link>
             </div>
+            {/* <div className="side-bar__link">
+              <i class="far fa-calendar-check"></i>
+              <Link to="/crear-cita">Citas</Link>
+            </div> */}
           </div>
-          {/* <Link to="/login" className="btn">Logout</Link> */}
       </div>
     </>
   )

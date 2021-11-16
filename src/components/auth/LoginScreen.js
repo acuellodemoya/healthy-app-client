@@ -30,7 +30,7 @@ export const LoginScreen = () => {
           <form >
             <input 
               className="auth__input" 
-              type="text" 
+              type="email" 
               placeholder=" Correo "
               name="email"
               value={ email }
