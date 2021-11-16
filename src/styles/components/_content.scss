@@ -1,0 +1,54 @@
+.container {
+  width: 90%;
+  margin: 0 auto;
+  height: fit-content;
+  min-height: 100vh;
+  background-color: rgb(241, 241, 241);
+  z-index: 1;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 1rem 3rem;
+
+  & .list-item {
+    padding: 1rem 3rem;
+    border: 1px solid rgba(214, 214, 214, 0.671);
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.actions .btn {
+  padding: 0.3rem 1rem;
+  margin-right: 5px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  color: white;
+}
+
+
+.actions .btn.edit{
+  background: rgb(121, 147, 235);
+  border:1px solid rgb(92, 112, 175);
+}
+
+.actions .btn.delete {
+  background: rgb(238, 85, 85);
+  border:1px solid rgb(197, 72, 72);
+}
+
+.btn-paciente {
+  background: rgb(144, 245, 131);
+  border: 1px solid rgb(119, 201, 108);
+  color: rgb(71, 122, 64);
+  margin-bottom: 10px;
+  cursor: pointer;
+  padding: 3px;
+}

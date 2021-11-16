@@ -1,0 +1,80 @@
+.auth__container {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+}
+
+.auth__container-content {
+  width: 60vw;
+  flex-grow: 4;
+  background-image: url("../../assets/img/doctor_small.jpg");
+  background-size: cover;
+}
+
+.overlay_img {
+  width: 100%;
+  height: 100%;
+  background: rgba($color: $primary-dark, $alpha: 0.7);
+}
+
+.auth__container-form {
+  width: 40vw;
+  align-items: center;
+  margin-top: 100px;
+
+  & .auth__form-title {
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  & form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+  }
+
+  & form > * {
+    align-self: center;
+    margin-top: 20px;
+  }
+
+}
+
+.auth__link {
+  text-decoration: none;
+  color: $primary-dark;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.auth__input {
+  width: 80%;
+  height: 20px;
+  border: 0px;
+  border-bottom: 1px solid $primary-dark;
+  text-align: center;
+
+  &:focus {
+    border-bottom: 1px solid $primary-dark;
+    outline: none;
+  }
+}
+
+.auth__btn {
+  width: 80%;
+  padding: 0.5rem 0.5rem;
+  background-color: $secondary-light;
+  border: none;
+  border-radius: 5px;
+  color: $light;
+  cursor: pointer;
+  font-size: 14px;
+
+  transition: background-color .3s ease;
+  &:hover {
+    background-color: $primary-dark;
+  }
+}

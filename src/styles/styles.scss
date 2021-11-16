@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+@import './base/colors';
+@import './base/base';
+
+@import './components/auth';
+@import './components/navbar';
+@import './components/content';
+@import './components/modal';
+
+html {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  background-color: rgb(235, 235, 235);
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
